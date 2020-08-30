@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.apirest</groupId>
-	<artifactId>controle-chamados</artifactId>
+	<artifactId>apirest-controle-chamados</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>controle-chamados</name>
+	<name>apirest-controle-chamados</name>
 	<description>Apirest Controle de Chamados</description>
 
 	<properties>
