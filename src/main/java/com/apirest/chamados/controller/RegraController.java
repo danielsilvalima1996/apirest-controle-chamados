@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apirest.chamados.model.Regra;
 import com.apirest.chamados.service.RegraService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin(origins = "*")
+@Api(value="API REST Regra")
 @RequestMapping("/api/regra")
 public class RegraController {
 
@@ -51,14 +53,14 @@ public class RegraController {
 
 	@ApiOperation(value = "Cria uma Regra")
 	@PostMapping(produces = { "application/json" }, consumes = { "application/json" })
-	public ResponseEntity<Regra> createRegra(@Valid @RequestBody Regra regra) {
+	public ResponseEntity<Regra> createRegra(@RequestBody @Valid Regra regra) throws Exception {
 		return new ResponseEntity<Regra>(
 				this.service.createRegra(regra), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value = "Altera uma Regra")
 	@PutMapping(produces = { "application/json" }, consumes = { "application/json" })
-	public ResponseEntity<Regra> alterRegra(@Valid @RequestBody Regra regra) {
+	public ResponseEntity<Regra> alterRegra(@RequestBody @Valid Regra regra) {
 		return new ResponseEntity<Regra>(
 				this.service.alterRegra(regra), HttpStatus.OK);
 	}
