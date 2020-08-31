@@ -14,26 +14,26 @@ import com.sun.istack.NotNull;
 @Entity
 @Table(name = "endereco")
 public class Endereco implements Serializable {
-	
-	private static final long serialVersionUID =1L;
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "cep", length = 8, nullable = false)
 	@NotNull
 	private String cep;
-	
+
 	@Column(name = "logradouro", length = 100, nullable = false)
 	@NotNull
 	private String logradouro;
-	
+
 	@Column(name = "complemento", length = 100, nullable = true)
 	@NotNull
 	private String complemento;
-	
+
 	@Column(name = "bairro", length = 100, nullable = false)
 	@NotNull
 	private String bairro;
@@ -41,10 +41,14 @@ public class Endereco implements Serializable {
 	@Column(name = "localidade", length = 50, nullable = false)
 	@NotNull
 	private String localidade;
-	
+
 	@Column(name = "uf", length = 2, nullable = false)
 	@NotNull
 	private String uf;
+
+	@Column(name = "numero", nullable = false)
+	@NotNull
+	private Long numero;
 
 	public Long getId() {
 		return id;
@@ -101,6 +105,13 @@ public class Endereco implements Serializable {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	
-	
+
+	public Long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
+	}
+
 }
