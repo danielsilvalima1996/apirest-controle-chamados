@@ -3,6 +3,8 @@ package com.apirest.chamados.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +27,8 @@ public class RegraController {
 
 	@ApiOperation(value = "Lista de Regras")
 	@GetMapping(produces = { "application/json" })
-	public List<Regra> findAll() {
-		return this.service.findAll();
+	public ResponseEntity<List<Regra>> findAll() {
+		return new ResponseEntity<List<Regra>>(this.service.findAll(), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Cria uma Regra")
