@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +19,14 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.sun.istack.NotNull;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "regra")
 public class Regra implements Serializable {
 
@@ -52,7 +56,7 @@ public class Regra implements Serializable {
 	@Column(name = "criadoPor", updatable = false)
 	private String criadoPor;
 
-	@LastModifiedDate
+	@LastModifiedBy
 	@Column(name = "modificadoPor")
 	private String modificadoPor;
 
