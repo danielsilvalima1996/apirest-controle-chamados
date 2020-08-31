@@ -3,6 +3,8 @@ package com.apirest.chamados.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -49,14 +51,14 @@ public class RegraController {
 
 	@ApiOperation(value = "Cria uma Regra")
 	@PostMapping(produces = { "application/json" }, consumes = { "application/json" })
-	public ResponseEntity<Regra> createRegra(@RequestBody Regra regra) {
+	public ResponseEntity<Regra> createRegra(@Valid @RequestBody Regra regra) {
 		return new ResponseEntity<Regra>(
 				this.service.createRegra(regra), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value = "Altera uma Regra")
 	@PutMapping(produces = { "application/json" }, consumes = { "application/json" })
-	public ResponseEntity<Regra> alterRegra(@RequestBody Regra regra) {
+	public ResponseEntity<Regra> alterRegra(@Valid @RequestBody Regra regra) {
 		return new ResponseEntity<Regra>(
 				this.service.alterRegra(regra), HttpStatus.OK);
 	}
