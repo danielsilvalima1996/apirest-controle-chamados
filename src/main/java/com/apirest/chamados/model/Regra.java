@@ -1,15 +1,22 @@
 package com.apirest.chamados.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -18,9 +25,9 @@ import com.sun.istack.NotNull;
 @Entity
 @Table(name = "regra")
 public class Regra implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -29,17 +36,29 @@ public class Regra implements Serializable {
 	@Column(name = "descricao", length = 100, nullable = false, unique = true)
 	@NotNull
 	private String descricao;
-	
+
 	@Column(name = "ativo", nullable = false)
 	private boolean ativo;
-	
+
 	@CreatedDate
-	@Column(name = "criado", nullable = false, updatable = false)
+	@Column(name = "criado", updatable = false)
 	private Date criado;
-	
+
 	@LastModifiedDate
-	@Column(name = "modificado", nullable = false)
+	@Column(name = "modificado")
 	private Date modificado;
+
+	@CreatedBy
+	@Column(name = "criadoPor", updatable = false)
+	private String criadoPor;
+
+	@LastModifiedDate
+	@Column(name = "modificadoPor")
+	private String modificadoPor;
+
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "idRegra", fetch = FetchType.EAGER)
+	private List<Usuario> idUsuario = new ArrayList<Usuario>();
 
 	public Long getId() {
 		return id;
@@ -80,16 +99,21 @@ public class Regra implements Serializable {
 	public void setModificado(Date modificado) {
 		this.modificado = modificado;
 	}
-	
-	/*
-	@CreatedDate
-	@Column(name = "criadoPor", nullable = false, updatable = false)
-	private long criadoPor;
-	
-	@LastModifiedDate
-	@Column(name = "modificadoPor", nullable = false)
-	private long modificadoPor;*/
-	
-	
+
+	public String getCriadoPor() {
+		return criadoPor;
+	}
+
+	public void setCriadoPor(String criadoPor) {
+		this.criadoPor = criadoPor;
+	}
+
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
 
 }
