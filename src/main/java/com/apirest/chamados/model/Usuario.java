@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,6 +35,7 @@ public class Usuario implements Serializable {
 	private Long id;
 
 	@NotNull
+	@Email
 	@Column(name = "email", unique = true, length = 255, nullable = false)
 	private String email;
 
