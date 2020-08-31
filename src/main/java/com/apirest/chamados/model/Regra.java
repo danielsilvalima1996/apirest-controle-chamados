@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -22,8 +23,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.sun.istack.NotNull;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -38,9 +37,10 @@ public class Regra implements Serializable {
 	private Long id;
 
 	@Column(name = "descricao", length = 100, nullable = false, unique = true)
-	@NotNull
+	@NotBlank(message =  "Descrição não pode ser vazia")
 	private String descricao;
 
+	@NotBlank(message = "Ativo não pode ser vazio")
 	@Column(name = "ativo", nullable = false)
 	private boolean ativo;
 
