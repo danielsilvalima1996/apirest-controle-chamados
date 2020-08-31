@@ -1,3 +1,0 @@
-ALTER TABLE empresa
-ADD CONSTRAINT FOREIGN KEY (idEndereco) 
-REFERENCES endereco(id)
