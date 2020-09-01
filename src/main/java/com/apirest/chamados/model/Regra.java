@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -36,13 +36,11 @@ public class Regra implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-//	@NotBlank(message =  "Descrição não pode ser vazia")
+	@NotBlank(message =  "Descrição não pode ser vazia")
 //	@NotNull
 	@Column(name = "descricao", length = 100, nullable = false, unique = true)
 	private String descricao;
 
-//	@NotBlank(message = "Ativo não pode ser vazio")
-	@NotNull
 	@Column(name = "ativo", nullable = false)
 	private boolean ativo;
 
