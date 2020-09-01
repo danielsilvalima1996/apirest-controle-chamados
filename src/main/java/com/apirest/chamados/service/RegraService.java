@@ -42,17 +42,18 @@ public class RegraService {
 	}
 
 	public Regra alterRegra(Regra regra) throws Exception {
-		var nova = findById(regra.getId());
+		var nova = this.repository.findById(regra.getId());
 		if (!nova.isPresent()) {
-			throw new Exception();
+			throw new Exception("Regra com o id + " + regra.getId() + " não encontrada, impossíve possível");
 		}
 		return this.repository.save(regra);
 	}
 
 	public void deleteRegra(Long id) throws Exception {
-		var nova = this.findById(id);
-		if (nova.isPresent()) {
-			this.repository.deleteById(id);
+		var nova = this.repository.findById(id);
+		if (!nova.isPresent()) {
+			throw new Exception("Regra com o id " + id + " não entrada, impossível excluir");
 		}
+		this.repository.deleteById(id);
 	}
 }
