@@ -52,7 +52,7 @@ public class StatusChamadoService {
 	public void deleteStatusChamado(Long id) throws Exception {
 		var novo = this.repository.findById(id);
 		if(!novo.isPresent()) {
-			throw new Exception("Status Chamado com id " + id + "não encontrada, impossível excluir");
+			throw new Exception("Status Chamado com id " + id + "não encontrado, impossível excluir");
 		}
 		this.repository.deleteById(id);
 	}

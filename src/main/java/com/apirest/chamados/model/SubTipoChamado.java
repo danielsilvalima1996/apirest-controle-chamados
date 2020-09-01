@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,8 +29,9 @@ public class SubTipoChamado implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
+	@NotBlank(message =  "Descrição não pode ser vazia")
 	@Column(name = "descricao", length = 50, nullable = false, unique = true)
-	@NotNull
+	//@NotNull
 	private String descricao;
 	
 	@Column(name = "ativo", nullable = false)
