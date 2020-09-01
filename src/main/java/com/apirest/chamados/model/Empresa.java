@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -38,14 +39,15 @@ public class Empresa implements Serializable {
 	private Long id;
 
 	@Column(name = "cnpj", length = 14, nullable = false, unique = true)
+	@Pattern(regexp = "([0-9]{14})", message = "CNPJ deve conter somente números com 14 digitos")
 	@NotNull
 	private String cnpj;
 
-	@Column(name = "razaoSocial", length = 100, nullable = false)
+	@Column(name = "razao_social", length = 100, nullable = false)
 	@NotNull
 	private String razaoSocial;
 
-	@Column(name = "nomeFantasia", length = 100, nullable = false)
+	@Column(name = "nome_fantasia", length = 100, nullable = false)
 	@NotNull
 	private String nomeFantasia;
 
@@ -86,11 +88,11 @@ public class Empresa implements Serializable {
 	private Date modificado;
 
 	@CreatedBy
-	@Column(name = "criadoPor", updatable = false)
+	@Column(name = "criado_por", updatable = false)
 	private String criadoPor;
 
 	@LastModifiedBy
-	@Column(name = "modificadoPor")
+	@Column(name = "modificado_por")
 	private String modificadoPor;
 
 	@Column(name = "ativo", nullable = false)
