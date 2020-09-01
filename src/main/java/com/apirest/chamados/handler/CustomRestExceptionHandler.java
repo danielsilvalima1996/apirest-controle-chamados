@@ -75,7 +75,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpStatus status, WebRequest request) {
 		String error = "No handler found for " + ex.getHttpMethod() + " " + ex.getRequestURL();
 
-		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), error);
+		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), error);
 		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
 
