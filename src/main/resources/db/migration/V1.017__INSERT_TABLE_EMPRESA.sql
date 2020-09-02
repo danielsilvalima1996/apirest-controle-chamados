@@ -1,4 +1,6 @@
 INSERT INTO empresa 
-	(id, cnpj , razaoSocial , nomeFantasia, criado , modificado, criadoPor, modificadoPor, ativo)
+	(id, cnpj, razao_social, nome_fantasia, criado, modificado, criado_por, modificado_por, ativo, 
+		cep, logradouro, complemento, bairro, localidade, uf, numero)
 VALUES
-	(1, '12345678901234', 'Empresa Teste S.A', 'Fantasia Teste', now(), now(), '', '', 1);
+	(1, '12345678901234', 'Empresa Teste S.A', 'Fantasia Teste', now(), now(), 'FLYWAY SYSTEM', 'FLYWAY SYSTEM', 1,
+		'07142290', 'Rua Força Pública', 'Faculdade', 'Centro', 'Guarulhos', 'SP', 89);

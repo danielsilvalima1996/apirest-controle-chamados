@@ -1,12 +1,20 @@
 CREATE TABLE IF NOT EXISTS empresa(
 	id BIGINT AUTO_INCREMENT NOT NULL,
-	cnpj VARCHAR(14) NOT NULL UNIQUE,
-	razaoSocial VARCHAR(100) NOT NULL UNIQUE,
-	nomeFantasia VARCHAR(100) NOT NULL,
+	cnpj VARCHAR(14) NOT NULL,
+	razao_social VARCHAR(100) NOT NULL,
+	nome_fantasia VARCHAR(100) NOT NULL,
 	criado DATETIME NOT NULL,
 	modificado DATETIME NOT NULL,
-	criadoPor BIGINT NOT NULL,
-	modificadoPor BIGINT NOT NULL,
+	criado_por VARCHAR(255) NOT NULL,
+	modificado_por VARCHAR(255) NOT NULL,
 	ativo BIT(1) NOT NULL,
-	PRIMARY KEY (id)	
+	cep VARCHAR(8) NOT NULL,
+	logradouro VARCHAR(100) NOT NULL,
+	complemento VARCHAR(100),
+	bairro VARCHAR(100) NOT NULL,
+	localidade VARCHAR(50) NOT NULL,
+	uf VARCHAR(2) NOT NULL,
+	numero NOT NULL,
+	CONSTRAINT PK_empresa_id PRIMARY KEY (id),
+	CONSTRAINT UC_empresa_cnpj UNIQUE (cnpj)
 );

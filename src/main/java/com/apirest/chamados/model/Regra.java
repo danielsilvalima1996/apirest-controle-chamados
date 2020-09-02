@@ -55,11 +55,11 @@ public class Regra implements Serializable {
 	private Date modificado;
 
 	@CreatedBy
-	@Column(name = "criadoPor", updatable = false)
+	@Column(name = "criado_por", updatable = false)
 	private String criadoPor;
 
 	@LastModifiedBy
-	@Column(name = "modificadoPor")
+	@Column(name = "modificado_por")
 	private String modificadoPor;
 
 	@Fetch(FetchMode.SELECT)

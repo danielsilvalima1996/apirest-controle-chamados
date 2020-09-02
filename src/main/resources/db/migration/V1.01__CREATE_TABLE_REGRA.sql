@@ -1,10 +1,11 @@
 CREATE TABLE IF NOT EXISTS regra(
 	id BIGINT AUTO_INCREMENT NOT NULL,
-	descricao VARCHAR(100) NOT NULL UNIQUE,
+	descricao VARCHAR(100) NOT NULL,
 	ativo BIT(1) NOT NULL,
 	criado DATETIME NOT NULL,
 	modificado DATETIME NOT NULL,
-	criadoPor BIGINT NOT NULL,
-	modificadoPor BIGINT NOT NULL,
-	PRIMARY KEY (id)
+	criado_por VARCHAR(255) NOT NULL,
+	modificado_por VARCHAR(255) NOT NULL,
+	CONSTRAINT PK_regra_id PRIMARY KEY (id) ,
+	CONSTRAINT UC_empresa_descricao UNIQUE (descricao)
 );
