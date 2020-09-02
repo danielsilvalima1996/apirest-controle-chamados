@@ -3,11 +3,11 @@ CREATE TABLE IF NOT EXISTS pagina(
 	link VARCHAR(50) NOT NULL,
 	icon VARCHAR(50) NOT NULL,
 	label VARCHAR(50) NOT NULL,
-	shortLabel VARCHAR(50) NOT NULL,
+	short_label VARCHAR(50) NOT NULL,
 	ativo BIT(1) NOT NULL,
 	criado DATETIME NOT NULL,
 	modificado DATETIME NOT NULL,
-	criadoPor BIGINT NOT NULL,
-	modificadoPor BIGINT NOT NULL,
-	PRIMARY KEY (id)
+	criado_por VARCHAR(255) NOT NULL,
+	modificado_por VARCHAR(255) NOT NULL,
+	CONSTRAINT PK_pagina_id PRIMARY KEY (id)
 );
