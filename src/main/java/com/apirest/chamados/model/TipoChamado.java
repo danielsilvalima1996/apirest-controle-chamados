@@ -1,10 +1,10 @@
 package com.apirest.chamados.model;
 
+import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,85 +14,86 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import com.sun.istack.NotNull;
-
-
 @Entity
-@Table(name="tipoChamado")
+@Table(name = "tipo_chamado")
 public class TipoChamado implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
-	
-	@NotBlank(message =  "Descrição não pode ser vazia")
-	@Column(name = "descricao", length = 50, nullable = false, unique = true)
-	//@NotNull
-	private String descricao;
-	
-	@Column(name = "ativo", nullable = false)
-	private boolean ativo;
-	
-	@CreatedDate
-	@Column(name = "criado", updatable = false)
-	private Date criado;
-	
-	@LastModifiedDate
-	@Column(name = "modificado")
-	private Date modificado;
-	
-	@Fetch(FetchMode.SELECT)
-	@OneToMany(mappedBy = "idTipoChamado",fetch = FetchType.EAGER)
-	private List<SubTipoChamado> idSubtipoChamado = new ArrayList<SubTipoChamado>();
+  private static final long serialVersionUID = 1L;
 
-	public Long getId() {
-		return id;
-	}
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  @NotBlank(message = "Descrição não pode ser vazia")
+  @Column(name = "descricao", length = 50, nullable = false, unique = true)
+  //@NotNull
+  private String descricao;
 
-	public String getDescricao() {
-		return descricao;
-	}
+  @Column(name = "ativo", nullable = false)
+  private boolean ativo;
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+  @CreatedDate
+  @Column(name = "criado", updatable = false)
+  private Date criado;
 
-	public boolean isAtivo() {
-		return ativo;
-	}
+  @LastModifiedDate
+  @Column(name = "modificado")
+  private Date modificado;
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
+  @CreatedBy
+  @Column(name = "criado_por", updatable = false)
+  private String criadoPor;
 
-	public Date getCriado() {
-		return criado;
-	}
+  @LastModifiedBy
+  @Column(name = "modificado_por")
+  private String modificadoPor;
 
-	public void setCriado(Date criado) {
-		this.criado = criado;
-	}
+  @Fetch(FetchMode.SELECT)
+  @OneToMany(mappedBy = "idTipoChamado", fetch = FetchType.EAGER)
+  private List<SubTipoChamado> idSubtipoChamado = new ArrayList<SubTipoChamado>();
 
-	public Date getModificado() {
-		return modificado;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public void setModificado(Date modificado) {
-		this.modificado = modificado;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	
+  public String getDescricao() {
+    return descricao;
+  }
+
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
+
+  public boolean isAtivo() {
+    return ativo;
+  }
+
+  public void setAtivo(boolean ativo) {
+    this.ativo = ativo;
+  }
+
+  public String getCriadoPor() {
+    return criadoPor;
+  }
+
+  public void setCriadoPor(String criadoPor) {
+    this.criadoPor = criadoPor;
+  }
+
+  public String getModificadoPor() {
+    return modificadoPor;
+  }
+
+  public void setModificadoPor(String modificadoPor) {
+    this.modificadoPor = modificadoPor;
+  }
 }
