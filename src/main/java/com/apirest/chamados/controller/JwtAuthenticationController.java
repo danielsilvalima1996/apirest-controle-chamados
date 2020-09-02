@@ -52,7 +52,7 @@ public class JwtAuthenticationController {
 		Map<Object, Object> model = new HashMap<>();
 		model.put("token", token);
 		model.put("email", authenticationRequest.getUsername());
-		model.put("nomeCompleto", "Verificar property nomeCompleto");
+		model.put("nomeCompleto", user.getNomeCompleto());
 		model.put("avatar", user.getAvatar());
 		model.put("id", user.getId());
 		model.put("ativo", user.isAtivo());

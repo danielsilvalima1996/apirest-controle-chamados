@@ -80,6 +80,7 @@ public class EmpresaSpecification {
 		if (uf == null) {
 			return null;
 		}
-		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("uf"), uf);
+		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
+				.like(criteriaBuilder.lower(root.<String>get("uf")), "%" + uf + "%");
 	}
 }

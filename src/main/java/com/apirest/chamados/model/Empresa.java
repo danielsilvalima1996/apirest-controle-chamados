@@ -231,12 +231,4 @@ public class Empresa implements Serializable {
 		this.numero = numero;
 	}
 
-	public List<Usuario> getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(List<Usuario> idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
 }
