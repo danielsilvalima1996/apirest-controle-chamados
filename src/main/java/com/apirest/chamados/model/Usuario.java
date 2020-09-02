@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	@NotNull
-	@Column(name = "nomeCompleto")
+	@Column(name = "nome_completo")
 	private String nomeCompleto;
 
 	@Column(name = "avatar")
@@ -56,12 +56,12 @@ public class Usuario implements Serializable {
 
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name = "idRegra")
+	@JoinColumn(name = "id_regra")
 	private Regra idRegra;
 
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name = "idEmpresa")
+	@JoinColumn(name = "id_empresa")
 	private Empresa idEmpresa;
 	
 	@CreatedDate
@@ -73,11 +73,11 @@ public class Usuario implements Serializable {
 	private Date modificado;
 
 	@CreatedBy
-	@Column(name = "criadoPor", updatable = false)
+	@Column(name = "criado_por", updatable = false)
 	private String criadoPor;
 
 	@LastModifiedBy
-	@Column(name = "modificadoPor")
+	@Column(name = "modificado_por")
 	private String modificadoPor;
 
 	@Column(name = "celular", length = 9)
@@ -86,10 +86,10 @@ public class Usuario implements Serializable {
 	@Column(name = "telefone", length = 8)
 	private String telefone;
 
-	@Column(name = "dddCelular", length = 2)
+	@Column(name = "ddd_celular", length = 2)
 	private String dddCelular;
 
-	@Column(name = "dddTelefone", length = 2)
+	@Column(name = "ddd_telefone", length = 2)
 	private String dddTelefone;
 
 	public Long getId() {
