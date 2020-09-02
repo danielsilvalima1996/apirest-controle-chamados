@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -33,19 +34,20 @@ public class TipoChamado implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
+	@NotBlank(message =  "Descrição não pode ser vazia")
 	@Column(name = "descricao", length = 50, nullable = false, unique = true)
-	@NotNull
+	//@NotNull
 	private String descricao;
 	
 	@Column(name = "ativo", nullable = false)
 	private boolean ativo;
 	
 	@CreatedDate
-	@Column(name = "criado", nullable = false, updatable = false)
+	@Column(name = "criado", updatable = false)
 	private Date criado;
 	
 	@LastModifiedDate
-	@Column(name = "modificado", nullable = false)
+	@Column(name = "modificado")
 	private Date modificado;
 	
 	@Fetch(FetchMode.SELECT)

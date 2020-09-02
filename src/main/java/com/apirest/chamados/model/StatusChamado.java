@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
@@ -22,12 +23,14 @@ public class StatusChamado implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
+	@NotBlank(message =  "Descrição não pode ser vazia")
 	@Column(name = "descricao", length = 100, nullable = false, unique = true)
-	@NotNull
+	// @NotNull
 	private String descricao;
-	
+
+	@NotBlank(message =  "Cor não pode ser vazia")
 	@Column(name = "cor", length = 25, nullable = false)
-	@NotNull
+	//@NotNull
 	private String cor;
 	
 	@Column(name = "ativo", nullable = false)

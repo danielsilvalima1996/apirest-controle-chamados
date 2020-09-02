@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
 public class StatusChamadoController {
 	
 	@Autowired
-	private StatusChamadoService stausChamadoService;
+	private StatusChamadoService statusChamadoService;
 	
 	@ApiOperation(value = "Lista de Status Chamados com filtros Id,Cor, Descrição e Ativo")
 	@GetMapping(produces = { "application/json" })
@@ -40,32 +40,32 @@ public class StatusChamadoController {
 			@Param(value = "descricao") String descricao,
 			@Param(value = "cor") String cor,
 			@Param(value = "ativo") Boolean ativo) throws Exception {
-		return this.stausChamadoService.findAll(id, cor, descricao, ativo);
+		return this.statusChamadoService.findAll(id, cor, descricao, ativo);
 	}
 	
 	@ApiOperation(value = "Encontra Status Chamado por Id")
 	@GetMapping(value = "{id}", produces = { "application/json" })
 	public Optional<StatusChamado> findById(
 			@PathVariable(value = "id") Long id) throws Exception {
-		return this.stausChamadoService.findById(id);
+		return this.statusChamadoService.findById(id);
 	}
 
 	@ApiOperation(value = "Cria uma Status Chamado")
 	@PostMapping(produces = { "application/json" }, consumes = { "application/json" })
 	public ResponseEntity<StatusChamado> createStatusChamado(@Valid @RequestBody StatusChamado statusChamado) {
 		return new ResponseEntity<StatusChamado>(
-				this.stausChamadoService.createStatusChamado(statusChamado), HttpStatus.CREATED);
+				this.statusChamadoService.createStatusChamado(statusChamado), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value = "Altera um Status Chamado")
 	@PutMapping(produces = { "application/json" }, consumes = { "application/json" })
 	public StatusChamado alterStatusChamado(@RequestBody @Valid StatusChamado statusChamado) throws Exception {
-		return this.stausChamadoService.alterStatusChamado(statusChamado);
+		return this.statusChamadoService.alterStatusChamado(statusChamado);
 	}
 	
 	@ApiOperation(value = "Deleta um Status Chamado")
 	@DeleteMapping(value = "{id}")
 	public void deletarStatusChamado(@PathVariable("id") Long id) throws Exception {
-		this.stausChamadoService.deleteStatusChamado(id);
+		this.statusChamadoService.deleteStatusChamado(id);
 	}
 }
