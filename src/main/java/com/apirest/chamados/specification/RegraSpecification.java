@@ -6,7 +6,7 @@ import com.apirest.chamados.model.Regra;
 
 public class RegraSpecification {
 
-	public static Specification<com.apirest.chamados.model.Regra> idRegra(Long id) {
+	public static Specification<Regra> idRegra(Long id) {
 		if (id == null) {
 			return null;
 		}
