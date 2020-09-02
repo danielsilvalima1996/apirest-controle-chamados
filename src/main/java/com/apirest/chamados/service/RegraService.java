@@ -37,7 +37,11 @@ public class RegraService {
 		return regra;
 	}
 
-	public Regra createRegra(Regra regra) {
+	public Regra createRegra(Regra regra) throws Exception {
+		var duplicated = this.repository.findByDescricao(regra.getDescricao());
+		if (duplicated != null) {
+			throw new Exception("Regra com a descrição " + regra.getDescricao() + " já cadastrado");
+		}
 		return this.repository.save(regra);
 	}
 

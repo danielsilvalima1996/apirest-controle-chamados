@@ -10,5 +10,8 @@ import com.apirest.chamados.model.Regra;
 public interface RegraRepository extends JpaRepository<Regra, Long> {
 	
 	public List<Regra> findAll(Specification<Regra> and);
+	
+	public Regra findByDescricao(String descricao);
+	
 
 }

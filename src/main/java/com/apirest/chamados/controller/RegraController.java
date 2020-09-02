@@ -50,7 +50,7 @@ public class RegraController {
 
 	@ApiOperation(value = "Cria uma Regra")
 	@PostMapping(produces = { "application/json" }, consumes = { "application/json" })
-	public Regra createRegra(@RequestBody @Valid Regra regra) {
+	public Regra createRegra(@RequestBody @Valid Regra regra) throws Exception {
 		return this.service.createRegra(regra);
 	}
 	
