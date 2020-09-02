@@ -60,7 +60,7 @@ public class TipoChamado implements Serializable {
 	private String modificadoPor;
 
 	@Fetch(FetchMode.SELECT)
-	@OneToMany(mappedBy = "id_subtipo_chamado", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "idTipoChamado", fetch = FetchType.EAGER)
 	private List<SubTipoChamado> idSubtipoChamado = new ArrayList<SubTipoChamado>();
 
 	public Long getId() {

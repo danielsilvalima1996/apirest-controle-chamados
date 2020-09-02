@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS empresa(
 	bairro VARCHAR(100) NOT NULL,
 	localidade VARCHAR(50) NOT NULL,
 	uf VARCHAR(2) NOT NULL,
-	numero NOT NULL,
+	numero BIGINT NOT NULL,
 	CONSTRAINT PK_empresa_id PRIMARY KEY (id),
 	CONSTRAINT UC_empresa_cnpj UNIQUE (cnpj)
 );
