@@ -26,7 +26,7 @@ public class UsuarioSpecification {
 			return null;
 		}
 		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-				.like(criteriaBuilder.lower(root.<String>get("nome_completo")), "%" + nomeCompleto + "%");
+				.like(criteriaBuilder.lower(root.<String>get("nomeCompleto")), "%" + nomeCompleto + "%");
 	}
 
 	public static Specification<Usuario> ativoUsuario(Boolean ativo) {
@@ -40,14 +40,14 @@ public class UsuarioSpecification {
 		if (idRegra == null) {
 			return null;
 		}
-		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("id_regra"), idRegra);
+		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("idRegra"), idRegra);
 	}
 
 	public static Specification<Usuario> idEmpresaUsuario(Long idEmpresa) {
 		if (idEmpresa == null) {
 			return null;
 		}
-		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("id_empresa"), idEmpresa);
+		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("idEmpresa"), idEmpresa);
 	}
 
 }

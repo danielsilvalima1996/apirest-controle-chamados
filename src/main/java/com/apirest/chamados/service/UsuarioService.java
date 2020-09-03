@@ -26,14 +26,13 @@ public class UsuarioService {
 			Long idEmpresa) throws Exception {
 		List<Usuario> usuario = new ArrayList<>();
 		usuario = repository.findAll(
-				where(
-						UsuarioSpecification.idUsuario(id)
-//						.and(UsuarioSpecification.emailUsuario(email))
-//						.and(UsuarioSpecification.nomeCompletoUsuario(nomeCompleto))
-						.and(UsuarioSpecification.ativoUsuario(ativo))
-//						.and(UsuarioSpecification.idRegraUsuario(idRegra))
-//						.and(UsuarioSpecification.idEmpresaUsuario(idEmpresa))
-				));
+				where(UsuarioSpecification.idUsuario(id))
+				.and(UsuarioSpecification.emailUsuario(email))
+				.and(UsuarioSpecification.nomeCompletoUsuario(nomeCompleto))
+				.and(UsuarioSpecification.ativoUsuario(ativo))
+				.and(UsuarioSpecification.idRegraUsuario(idRegra))
+				.and(UsuarioSpecification.idEmpresaUsuario(idEmpresa))
+				);
 		if (usuario.size() == 0) {
 			throw new Exception("Não há dados");
 		}
