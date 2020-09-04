@@ -38,8 +38,8 @@ public class Tecnico implements Serializable {
 	private boolean ativo;
 
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    private Usuario idUsuario;
+	@JoinColumn(name = "id_usuario", referencedColumnName = "id")
+	private Usuario idUsuario;
 
 	@CreatedDate
 	@Column(name = "criado", updatable = false)
@@ -112,6 +112,5 @@ public class Tecnico implements Serializable {
 	public void setModificadoPor(String modificadoPor) {
 		this.modificadoPor = modificadoPor;
 	}
-	
 
 }
