@@ -55,7 +55,7 @@ public class SubTipoChamado implements Serializable {
 	private String modificadoPor;
 
 	@ManyToOne
-	@JoinColumn(name = "idSubtipoChamado")
+	@JoinColumn(name = "id_tipo_chamado")
 	private TipoChamado idTipoChamado;
 
 	public Long getId() {

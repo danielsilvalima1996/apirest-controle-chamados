@@ -3,8 +3,6 @@ package com.apirest.chamados.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,8 +24,7 @@ public class SubTipoChamadoController {
 	
 	@ApiOperation(value = "Cria um subtipo Chamado")
 	@PostMapping(produces = {"application/json"},consumes ={"application/json"})
-	public ResponseEntity<SubTipoChamado> createSubTipoChamado(@Valid @RequestBody SubTipoChamado subtipoChamado) {
-		return new ResponseEntity<SubTipoChamado>(
-				this.subtipoChamadoService.createSubTipoChamado(subtipoChamado), HttpStatus.CREATED);
+	public SubTipoChamado createSubTipoChamado(@Valid @RequestBody SubTipoChamado subtipoChamado) {
+		return this.subtipoChamadoService.createSubTipoChamado(subtipoChamado);
 	}
 }
