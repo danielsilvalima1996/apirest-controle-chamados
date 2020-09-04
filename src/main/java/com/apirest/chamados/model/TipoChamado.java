@@ -118,13 +118,13 @@ public class TipoChamado implements Serializable {
 	public void setModificado(Date modificado) {
 		this.modificado = modificado;
 	}
-
-	public List<SubTipoChamado> getIdSubtipoChamado() {
-		return idSubtipoChamado;
-	}
-
-	public void setIdSubtipoChamado(List<SubTipoChamado> idSubtipoChamado) {
-		this.idSubtipoChamado = idSubtipoChamado;
-	}
+//
+//	public List<SubTipoChamado> getIdSubtipoChamado() {
+//		return idSubtipoChamado;
+//	}
+//
+//	public void setIdSubtipoChamado(List<SubTipoChamado> idSubtipoChamado) {
+//		this.idSubtipoChamado = idSubtipoChamado;
+//	}
 
 }
