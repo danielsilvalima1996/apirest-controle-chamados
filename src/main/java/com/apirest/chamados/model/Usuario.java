@@ -3,9 +3,11 @@ package com.apirest.chamados.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,7 +67,9 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "id_empresa")
 	private Empresa idEmpresa;
 	
-    @OneToOne(mappedBy = "idUsuario")
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "idUsuario")
     private Tecnico idTecnico;
 	
 	@CreatedDate

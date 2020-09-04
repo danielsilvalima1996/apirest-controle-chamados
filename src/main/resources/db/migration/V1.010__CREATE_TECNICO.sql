@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS tecnico (
 	modificado_por VARCHAR(255) NOT NULL,
 	CONSTRAINT PK_tecnico_id PRIMARY KEY (id),
 	CONSTRAINT FK_tecnico_id_usuario FOREIGN KEY (id_usuario) REFERENCES usuario (id),
-	CONSTRAINT UC_tenico_id_usuario UNIQUE (id_usuario)
+	CONSTRAINT UC_tecnico_id_usuario UNIQUE (id_usuario)
 );

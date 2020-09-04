@@ -52,7 +52,6 @@ public class TecnicoController {
 	@PostMapping(produces = { "application/json" }, consumes = { "application/json" })
 	public Tecnico createTecnico(@RequestBody @Valid Tecnico tecnico) throws Exception {
 		return this.service.createTecnico(tecnico);
-//		return tecnico;
 	}
 	
 	@ApiOperation(value = "Altera um Técnico")

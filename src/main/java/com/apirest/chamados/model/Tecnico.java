@@ -3,10 +3,10 @@ package com.apirest.chamados.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,8 +37,8 @@ public class Tecnico implements Serializable {
 	@Column(name = "ativo", nullable = false)
 	private boolean ativo;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario", referencedColumnName = "id")
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "id_usuario", nullable = false)
 	private Usuario idUsuario;
 
 	@CreatedDate
