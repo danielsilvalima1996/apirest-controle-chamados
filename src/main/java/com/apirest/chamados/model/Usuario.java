@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
@@ -63,6 +64,9 @@ public class Usuario implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name = "id_empresa")
 	private Empresa idEmpresa;
+	
+    @OneToOne(mappedBy = "idUsuario")
+    private Tecnico idTecnico;
 	
 	@CreatedDate
 	@Column(name = "criado", updatable = false)
