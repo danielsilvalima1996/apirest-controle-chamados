@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS usuario(
 	telefone VARCHAR(8),
 	ddd_celular VARCHAR(2),
 	ddd_telefone VARCHAR(2),
+	is_tecnico BIT(1),
 	CONSTRAINT PK_usuario_id PRIMARY KEY (id),
 	CONSTRAINT FK_usuario_id_regra FOREIGN KEY (id_regra) REFERENCES regra(id),
 	CONSTRAINT FK_usuario_id_empresa FOREIGN KEY (id_empresa) REFERENCES empresa(id),

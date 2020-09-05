@@ -50,4 +50,11 @@ public class UsuarioSpecification {
 		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("idEmpresa"), idEmpresa);
 	}
 
+	public static Specification<Usuario> isTecnicoUsuario(Boolean isTecnico) {
+		if (isTecnico == null) {
+			return null;
+		}
+		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("isTecnico"), isTecnico);
+	}
+
 }

@@ -32,7 +32,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
 
-	@ApiOperation(value = "Lista de Usuário com filtros Id, E-mail, Nome Completo, Ativo, Id Regra e Id Empresa")
+	@ApiOperation(value = "Lista de Usuário com filtros Id, E-mail, Nome Completo, Ativo, Id Regra, Id Empresa e isTecnico")
 	@GetMapping(produces = { "application/json" })
 	public List<Usuario> findAll(
 			@Param(value = "id") Long id,
@@ -40,8 +40,9 @@ public class UsuarioController {
 			@Param(value = "nomeCompleto") String nomeCompleto,
 			@Param(value = "ativo") Boolean ativo,
 			@Param(value = "idRegra") Long idRegra,
-			@Param(value = "idEmpresa") Long idEmpresa) throws Exception {
-		return this.service.findAll(id, email, nomeCompleto, ativo, idRegra, idEmpresa);
+			@Param(value = "idEmpresa") Long idEmpresa,
+			@Param(value = "isTecnico") Boolean isTecnico) throws Exception {
+		return this.service.findAll(id, email, nomeCompleto, ativo, idRegra, idEmpresa, isTecnico);
 	}
 	
 	@ApiOperation(value = "Encontra Usuario por Id")

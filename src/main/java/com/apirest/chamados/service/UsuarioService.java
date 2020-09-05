@@ -23,7 +23,7 @@ public class UsuarioService {
 	private static final BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 
 	public List<Usuario> findAll(Long id, String email, String nomeCompleto, Boolean ativo, Long idRegra,
-			Long idEmpresa) throws Exception {
+			Long idEmpresa, Boolean isTecnico) throws Exception {
 		List<Usuario> usuario = new ArrayList<>();
 		usuario = repository.findAll(
 				where(UsuarioSpecification.idUsuario(id))
@@ -32,6 +32,7 @@ public class UsuarioService {
 				.and(UsuarioSpecification.ativoUsuario(ativo))
 				.and(UsuarioSpecification.idRegraUsuario(idRegra))
 				.and(UsuarioSpecification.idEmpresaUsuario(idEmpresa))
+				.and(UsuarioSpecification.isTecnicoUsuario(isTecnico))
 				);
 		if (usuario.size() == 0) {
 			throw new Exception("Não há dados");

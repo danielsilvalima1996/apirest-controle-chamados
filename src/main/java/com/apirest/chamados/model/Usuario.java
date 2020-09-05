@@ -3,17 +3,14 @@ package com.apirest.chamados.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
@@ -66,12 +63,10 @@ public class Usuario implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name = "id_empresa")
 	private Empresa idEmpresa;
-	
-	@OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "idUsuario")
-    private Tecnico idTecnico;
-	
+
+	@Column(name = "is_tecnico", nullable = false)
+	private Boolean isTecnico;
+
 	@CreatedDate
 	@Column(name = "criado", updatable = false)
 	private Date criado;
@@ -226,6 +221,14 @@ public class Usuario implements Serializable {
 
 	public void setDddTelefone(String dddTelefone) {
 		this.dddTelefone = dddTelefone;
+	}
+
+	public Boolean getIsTecnico() {
+		return isTecnico;
+	}
+
+	public void setIsTecnico(Boolean isTecnico) {
+		this.isTecnico = isTecnico;
 	}
 
 }
