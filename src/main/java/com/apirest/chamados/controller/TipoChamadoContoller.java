@@ -57,7 +57,7 @@ public class TipoChamadoContoller {
 	
 	@ApiOperation(value = "Altera um Tipo Chamado")
 	@PutMapping(produces = { "application/json" }, consumes = { "application/json" })
-	public TipoChamado alterStatusChamado(@RequestBody @Valid TipoChamado tipoChamado) throws Exception {
+	public TipoChamado alterSubTipoChamado(@RequestBody @Valid TipoChamado tipoChamado) throws Exception {
 		return this.tipoChamadoService.alterTipoChamado(tipoChamado);
 	}
 	
