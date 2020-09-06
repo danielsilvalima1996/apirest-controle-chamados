@@ -6,11 +6,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -36,13 +38,9 @@ public class Tecnico implements Serializable {
 	@Column(name = "ativo", nullable = false)
 	private boolean ativo;
 	
-	@NotBlank(message = "Nome Completo não pode ser vazio")
-	@Column(name = "nome_completo", nullable = false, length = 255)
-	private String nomeCompleto;
-	
-	@NotBlank(message = "Email não pode ser vazio")
-	@Column(name = "email", nullable = false, length = 255, unique = true)
-	private String email;
+	@OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_usuario", nullable = false, unique = true)
+	private Usuario idUsuario;
 
 	@CreatedDate
 	@Column(name = "criado", updatable = false)
@@ -76,20 +74,12 @@ public class Tecnico implements Serializable {
 		this.ativo = ativo;
 	}
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	public Usuario getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setIdUsuario(Usuario idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public Date getCriado() {
