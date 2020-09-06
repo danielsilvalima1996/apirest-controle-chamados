@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS chamado (
+	id BIGINT AUTO_INCREMENT NOT NULL,
+	id_usuario BIGINT NOT NULL,
+	data_abertura DATETIME NOT NULL,
+	data_fechamento DATETIME,
+	status_chamado INT NOT NULL,
+	id_tipo_chamado BIGINT NOT NULL,
+	id_subtipo_chamado BIGINT NOT NULL,
+	id_tecnico BIGINT,
+	descricao VARCHAR(255) NOT NULL,
+	criado DATETIME NOT NULL,
+	modificado DATETIME NOT NULL,
+	criado_por VARCHAR(255) NOT NULL,
+	modificado_por VARCHAR(255) NOT NULL,
+	CONSTRAINT PK_chamado_id PRIMARY KEY (id),
+	CONSTRAINT FK_chamado_id_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+	CONSTRAINT FK_chamado_id_tipo_chamado FOREIGN KEY (id_tipo_chamado) REFERENCES tipo_chamado(id),
+	CONSTRAINT FK_chamado_id_subtipo_chamado FOREIGN KEY (id_subtipo_chamado) REFERENCES subtipo_chamado(id),
+	CONSTRAINT FK_chamado_id_tecnico FOREIGN KEY (id_tecnico) REFERENCES tecnico(id)
+);

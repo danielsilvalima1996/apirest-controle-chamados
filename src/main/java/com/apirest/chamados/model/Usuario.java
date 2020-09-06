@@ -1,7 +1,9 @@
 package com.apirest.chamados.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,11 +15,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -73,6 +78,11 @@ public class Usuario implements Serializable {
             cascade =  CascadeType.ALL,
             mappedBy = "idUsuario")
 	private Tecnico idTecnico;
+	
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "idUsuario", fetch = FetchType.EAGER)
+	private List<Chamado> idChamado = new ArrayList<Chamado>();
+	
 
 	@CreatedDate
 	@Column(name = "criado", updatable = false)

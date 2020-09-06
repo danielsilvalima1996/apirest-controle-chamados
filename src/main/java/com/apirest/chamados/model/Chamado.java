@@ -1,25 +1,19 @@
 package com.apirest.chamados.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -28,21 +22,44 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "subtipo_chamado")
-public class SubTipoChamado implements Serializable {
+@Table(name = "chamado")
+public class Chamado implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario idUsuario;
+	
+	@Column(name = "data_abertura", updatable = false)
+	private Date dataAbertura;
+	
+	@Column(name = "data_fechamento")
+	private Date dataFechamento;
+	
+	@Column(name = "status_chamado")
+	private Integer statusChamado;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_tipo_chamado")
+	private TipoChamado idTipoChamado;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_tipo_subchamado")
+	private SubTipoChamado idSubtipoChamado;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_tecnico")
+	private Tecnico idTecnico;
 
-	@NotBlank(message = "Descrição não pode ser vazia")
-	@Column(name = "descricao", length = 50, nullable = false, unique = true)
+	@NotBlank(message =  "Descrição não pode ser vazia")
+	@Column(name = "descricao", length = 255, nullable = false)
 	private String descricao;
-
-	@Column(name = "ativo", nullable = false)
-	private boolean ativo;
 
 	@CreatedDate
 	@Column(name = "criado", updatable = false)
@@ -60,14 +77,6 @@ public class SubTipoChamado implements Serializable {
 	@Column(name = "modificado_por")
 	private String modificadoPor;
 
-	@ManyToOne
-	@JoinColumn(name = "id_tipo_chamado")
-	private TipoChamado idTipoChamado;
-	
-	@Fetch(FetchMode.SELECT)
-	@OneToMany(mappedBy = "idSubtipoChamado", fetch = FetchType.EAGER)
-	private List<Chamado> idChamado = new ArrayList<Chamado>();
-
 	public Long getId() {
 		return id;
 	}
@@ -76,20 +85,68 @@ public class SubTipoChamado implements Serializable {
 		this.id = id;
 	}
 
+	public Usuario getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Usuario idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
+
+	public void setDataFechamento(Date dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+
+	public Integer getStatusChamado() {
+		return statusChamado;
+	}
+
+	public void setStatusChamado(Integer statusChamado) {
+		this.statusChamado = statusChamado;
+	}
+
+	public TipoChamado getIdTipoChamado() {
+		return idTipoChamado;
+	}
+
+	public void setIdTipoChamado(TipoChamado idTipoChamado) {
+		this.idTipoChamado = idTipoChamado;
+	}
+
+	public SubTipoChamado getIdSubtipoChamado() {
+		return idSubtipoChamado;
+	}
+
+	public void setIdSubtipoChamado(SubTipoChamado idSubtipoChamado) {
+		this.idSubtipoChamado = idSubtipoChamado;
+	}
+
+	public Tecnico getIdTecnico() {
+		return idTecnico;
+	}
+
+	public void setIdTecnico(Tecnico idTecnico) {
+		this.idTecnico = idTecnico;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	public Date getCriado() {
@@ -124,12 +181,4 @@ public class SubTipoChamado implements Serializable {
 		this.modificadoPor = modificadoPor;
 	}
 
-	public TipoChamado getIdTipoChamado() {
-		return idTipoChamado;
-	}
-
-	public void setIdTipoChamado(TipoChamado idTipoChamado) {
-		this.idTipoChamado = idTipoChamado;
-	}
-	
 }

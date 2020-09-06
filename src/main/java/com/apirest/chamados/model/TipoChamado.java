@@ -63,6 +63,10 @@ public class TipoChamado implements Serializable {
 	@OneToMany(mappedBy = "idTipoChamado", fetch = FetchType.EAGER)
 	private List<SubTipoChamado> idSubtipoChamado = new ArrayList<SubTipoChamado>();
 
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "idTipoChamado", fetch = FetchType.EAGER)
+	private List<Chamado> idChamado = new ArrayList<Chamado>();
+	
 	public Long getId() {
 		return id;
 	}

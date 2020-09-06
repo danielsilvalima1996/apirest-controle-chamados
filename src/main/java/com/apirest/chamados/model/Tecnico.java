@@ -1,7 +1,9 @@
 package com.apirest.chamados.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +13,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -41,6 +46,10 @@ public class Tecnico implements Serializable {
 	@OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_usuario", nullable = false, unique = true)
 	private Usuario idUsuario;
+	
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "idTecnico", fetch = FetchType.EAGER)
+	private List<Chamado> idChamado = new ArrayList<Chamado>();
 
 	@CreatedDate
 	@Column(name = "criado", updatable = false)
