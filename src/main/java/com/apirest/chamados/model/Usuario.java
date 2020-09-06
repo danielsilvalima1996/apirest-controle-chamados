@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,16 +35,16 @@ public class Usuario implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-	@NotNull
+	@NotBlank(message = "E-mail é obrigatório")
 	@Email
 	@Column(name = "email", unique = true, length = 255, nullable = false)
 	private String email;
 
-	@NotNull
+	@NotBlank(message = "Senha é obrigatória")
 	@Column(name = "senha")
 	private String senha;
 
-	@NotNull
+	@NotBlank(message = "Nome Completo é obrigatório")
 	@Column(name = "nome_completo")
 	private String nomeCompleto;
 
@@ -54,12 +55,12 @@ public class Usuario implements Serializable {
 	@Column(name = "ativo", nullable = false)
 	private boolean ativo;
 
-	@NotNull
+	@NotBlank(message = "Regra do usuário é obrigatória")
 	@ManyToOne()
 	@JoinColumn(name = "id_regra")
 	private Regra idRegra;
 
-	@NotNull
+	@NotBlank(message = "Empresa do usuário é obrigatória")
 	@ManyToOne()
 	@JoinColumn(name = "id_empresa")
 	private Empresa idEmpresa;
