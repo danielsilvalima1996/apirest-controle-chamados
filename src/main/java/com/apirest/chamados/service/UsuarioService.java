@@ -46,6 +46,7 @@ public class UsuarioService {
 		if (!usuario.isPresent()) {
 			throw new Exception("Usuário com o id " + id + " não encontrado");
 		}
+		usuario.get().setSenha("");
 		return usuario;
 	}
 
@@ -54,12 +55,17 @@ public class UsuarioService {
 		if (duplicated != null) {
 			throw new Exception("E-mail " + usuario.getEmail() + " já cadastrado");
 		}
+		if (usuario.getSenha().isEmpty()) {
+			throw new Exception("A senha não pode ser vazia");
+		}
 		String result = bc.encode(usuario.getSenha());
 		usuario.setSenha(result);
 		String avatar = "https://api.adorable.io/avatars/64/" + usuario.getEmail() + ".png";
 		usuario.setAvatar(avatar);
 		usuario.setAtivo(true);
-		return this.repository.save(usuario);
+		Usuario novo = this.repository.save(usuario);
+		novo.setSenha("");
+		return novo;
 	}
 	
 	public Usuario alterUsuario(Usuario usuario) throws Exception {
@@ -75,7 +81,9 @@ public class UsuarioService {
 		}
 		String avatar = "https://api.adorable.io/avatars/64/" + usuario.getEmail() + ".png";
 		usuario.setAvatar(avatar);
-		return this.repository.save(usuario);
+		Usuario novo = this.repository.save(usuario);
+		novo.setSenha("");
+		return novo;
 	}
 
 	public void deleteUsuario(Long id) throws Exception {

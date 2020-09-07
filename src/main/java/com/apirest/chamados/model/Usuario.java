@@ -48,7 +48,6 @@ public class Usuario implements Serializable {
 	@Column(name = "email", unique = true, length = 255, nullable = false)
 	private String email;
 
-	@NotBlank(message = "Senha é obrigatória")
 	@Column(name = "senha")
 	private String senha;
 
