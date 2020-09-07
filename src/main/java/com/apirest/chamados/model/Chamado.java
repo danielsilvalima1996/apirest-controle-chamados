@@ -42,7 +42,7 @@ public class Chamado implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario idUsuario;
 	
-	@Column(name = "data_abertura", updatable = false)
+	@Column(name = "data_abertura")
 	private Date dataAbertura;
 	
 	@Column(name = "data_fechamento")
