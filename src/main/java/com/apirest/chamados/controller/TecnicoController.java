@@ -64,7 +64,7 @@ public class TecnicoController {
 	
 	@ApiOperation(value = "Deleta um Técnico por Id")
 	@DeleteMapping(value = "{id}")
-	public void alterTecnico(@PathVariable("id") Long id) throws Exception {
+	public void deleteTecnico(@PathVariable("id") Long id) throws Exception {
 		this.service.deleteTecnico(id);
 	}
 

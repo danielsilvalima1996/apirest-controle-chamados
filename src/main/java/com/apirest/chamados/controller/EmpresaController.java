@@ -69,7 +69,7 @@ public class EmpresaController {
 	
 	@ApiOperation(value = "Deleta uma Empresa")
 	@DeleteMapping(value = "{id}")
-	public void alterEmpresa(@PathVariable("id") Long id) throws Exception {
+	public void deleteEmpresa(@PathVariable("id") Long id) throws Exception {
 		this.service.deleteEmpresa(id);
 	}
 

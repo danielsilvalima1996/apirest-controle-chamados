@@ -62,7 +62,7 @@ public class RegraController {
 	
 	@ApiOperation(value = "Deleta uma Regra")
 	@DeleteMapping(value = "{id}")
-	public void alterRegra(@PathVariable("id") Long id) throws Exception {
+	public void deleteRegra(@PathVariable("id") Long id) throws Exception {
 		this.service.deleteRegra(id);
 	}
 

@@ -66,7 +66,7 @@ public class UsuarioController {
 	
 	@ApiOperation(value = "Deleta um Usuario")
 	@DeleteMapping(value = "{id}")
-	public void alterUsuario(@PathVariable("id") Long id) throws Exception {
+	public void deleteUsuario(@PathVariable("id") Long id) throws Exception {
 		this.service.deleteUsuario(id);
 	}
 
