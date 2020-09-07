@@ -50,7 +50,7 @@ public class Chamado implements Serializable {
 	private TipoChamado idTipoChamado;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_tipo_subchamado")
+	@JoinColumn(name = "id_subtipo_chamado")
 	private SubTipoChamado idSubtipoChamado;
 	
 	@ManyToOne
