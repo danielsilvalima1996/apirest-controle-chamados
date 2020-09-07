@@ -82,6 +82,10 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "idUsuario", fetch = FetchType.EAGER)
 	private List<Chamado> idChamado = new ArrayList<Chamado>();
 
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "idUsuario", fetch = FetchType.EAGER)
+	private List<ComentarioChamado> idComentarioChamado = new ArrayList<ComentarioChamado>();
+
 	@CreatedDate
 	@Column(name = "criado", updatable = false)
 	private Date criado;

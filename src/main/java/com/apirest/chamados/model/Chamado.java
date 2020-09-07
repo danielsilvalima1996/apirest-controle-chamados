@@ -1,19 +1,25 @@
 package com.apirest.chamados.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -76,6 +82,10 @@ public class Chamado implements Serializable {
 	@LastModifiedBy
 	@Column(name = "modificado_por")
 	private String modificadoPor;
+
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "idChamado", fetch = FetchType.EAGER)
+	private List<ComentarioChamado> idComentarioChamado = new ArrayList<ComentarioChamado>();
 
 	public Long getId() {
 		return id;
@@ -180,5 +190,15 @@ public class Chamado implements Serializable {
 	public void setModificadoPor(String modificadoPor) {
 		this.modificadoPor = modificadoPor;
 	}
+
+	// public List<ComentarioChamado> getIdComentarioChamado() {
+	// 	return idComentarioChamado;
+	// }
+
+	// public void setIdComentarioChamado(List<ComentarioChamado> idComentarioChamado) {
+	// 	this.idComentarioChamado = idComentarioChamado;
+	// }
+
+	
 
 }
