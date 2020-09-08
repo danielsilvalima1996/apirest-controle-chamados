@@ -9,6 +9,7 @@ import com.apirest.chamados.model.Chamado;
 import com.apirest.chamados.service.ChamadoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +34,15 @@ public class ChamadoController {
 
 	@ApiOperation(value = "Lista de Chamado com filtros Id, Descrição e Ativo")
 	@GetMapping(produces = { "application/json" })
-	public List<Chamado> findAll() throws Exception {
-		return this.service.findAll();
+	public List<Chamado> findAll(
+		@Param(value = "id") Long id, 
+		@Param(value = "idUsuario") Long idUsuario, 
+		@Param(value = "statusChamado") Integer statusChamado, 
+		@Param(value = "idTipoChamado") Long idTipoChamado, 
+		@Param(value = "idSubtipoChamado") Long idSubtipoChamado, 
+		@Param(value = "idTecnico") Long idTecnico, 
+		@Param(value = "descricao") String descricao) throws Exception {
+		return this.service.findAll(id, idUsuario, statusChamado, idTipoChamado, idSubtipoChamado, idTecnico, descricao);
 	}
 	
 	@ApiOperation(value = "Encontra Chamado por Id")
