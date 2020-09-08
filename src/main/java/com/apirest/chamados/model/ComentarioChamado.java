@@ -41,7 +41,7 @@ public class ComentarioChamado {
 	
 	@JoinColumn(name = "id_usuario")
 	@ManyToOne()
-	private Chamado idUsuario;
+	private Usuario idUsuario;
 
 	@CreatedDate
 	@Column(name = "criado", updatable = false)
@@ -75,11 +75,11 @@ public class ComentarioChamado {
 		this.comentario = comentario;
 	}
 
-	public Chamado getIdUsuario() {
+	public Usuario getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(Chamado idUsuario) {
+	public void setIdUsuario(Usuario idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -114,11 +114,7 @@ public class ComentarioChamado {
 	public void setModificadoPor(String modificadoPor) {
 		this.modificadoPor = modificadoPor;
 	}
-
-	public Chamado getIdChamado() {
-		return idChamado;
-	}
-
+	
 	public void setIdChamado(Chamado idChamado) {
 		this.idChamado = idChamado;
 	}
