@@ -69,9 +69,6 @@ public class Usuario implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name = "id_empresa")
 	private Empresa idEmpresa;
-
-	@Column(name = "is_tecnico", nullable = false)
-	private Boolean isTecnico;
 	
 	@OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
@@ -240,14 +237,6 @@ public class Usuario implements Serializable {
 
 	public void setDddTelefone(String dddTelefone) {
 		this.dddTelefone = dddTelefone;
-	}
-
-	public Boolean getIsTecnico() {
-		return isTecnico;
-	}
-
-	public void setIsTecnico(Boolean isTecnico) {
-		this.isTecnico = isTecnico;
 	}
 
 }
