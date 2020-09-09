@@ -1,0 +1,2 @@
+ALTER TABLE pagina
+ADD parent BIGINT;
