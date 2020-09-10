@@ -1,7 +1,9 @@
 package com.apirest.chamados.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -67,8 +70,11 @@ public class Pagina implements Serializable {
 	private String modificadoPor;
 
 	@NotNull
-	@Column(name = "parent", length = 50, nullable = false)
-	private String parent;
+	@Column(name = "parent", nullable = false)
+	private Long parent;
+
+	@ManyToMany(mappedBy = "idPagina")
+	private List<Regra> idRegra = new ArrayList<Regra>();
 
 	public Long getId() {
 		return id;
@@ -150,11 +156,11 @@ public class Pagina implements Serializable {
 		this.modificadoPor = modificadoPor;
 	}
 
-	public String getParent() {
+	public Long getParent() {
 		return parent;
 	}
 
-	public void setParent(String parent) {
+	public void setParent(Long parent) {
 		this.parent = parent;
 	}
 

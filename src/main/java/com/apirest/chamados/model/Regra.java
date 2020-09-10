@@ -12,6 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -65,6 +68,13 @@ public class Regra implements Serializable {
 	@Fetch(FetchMode.SELECT)
 	@OneToMany(mappedBy = "idRegra", fetch = FetchType.EAGER)
 	private List<Usuario> idUsuario = new ArrayList<Usuario>();
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+	  name = "regra_pagina", 
+	  joinColumns = @JoinColumn(name = "id_regra"), 
+	  inverseJoinColumns = @JoinColumn(name = "id_pagina"))
+	private List<Pagina> idPagina = new ArrayList<Pagina>();
 
 	public Long getId() {
 		return id;
@@ -120,6 +130,14 @@ public class Regra implements Serializable {
 
 	public void setModificadoPor(String modificadoPor) {
 		this.modificadoPor = modificadoPor;
+	}
+
+	public List<Pagina> getIdPagina() {
+		return idPagina;
+	}
+
+	public void setIdPagina(List<Pagina> idPagina) {
+		this.idPagina = idPagina;
 	}
 
 }
