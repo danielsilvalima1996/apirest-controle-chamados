@@ -26,7 +26,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("Usuário não encontrado com o email: " + email);
 		}
-		SimpleGrantedAuthority authority = new SimpleGrantedAuthority("X");
+		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getIdRegra().getDescricao());
 		List<SimpleGrantedAuthority> list = new ArrayList<SimpleGrantedAuthority>();
 		list.add(authority);
 		return new User(user.getEmail(), user.getSenha(), list);
