@@ -3,7 +3,7 @@ package com.apirest.chamados.controller;
 import java.util.List;
 
 import com.apirest.chamados.model.Pagina;
-import com.apirest.chamados.repository.PaginaRepository;
+import com.apirest.chamados.service.PaginaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,12 +21,12 @@ import io.swagger.annotations.ApiOperation;
 public class PaginaController {
 
 	@Autowired
-	private PaginaRepository repository;
+	private PaginaService service;
 
 	@ApiOperation(value = "Lista de Página")
 	@GetMapping(produces = { "application/json" })
 	public List<Pagina> findAll() throws Exception {
-		return this.repository.findAll();
+		return this.service.findAll();
 	}
 
 }
