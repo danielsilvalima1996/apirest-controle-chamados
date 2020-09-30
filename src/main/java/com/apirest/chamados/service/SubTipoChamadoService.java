@@ -21,10 +21,14 @@ public class SubTipoChamadoService {
 	private SubTipoChamadoRepository repository;
 	
 	
-	public List<SubTipoChamado> findAll(Long id, String descricao, Boolean ativo) throws Exception {
+	public List<SubTipoChamado> findAll(Long id, String descricao, Boolean ativo, Long idTipoChamado) throws Exception {
 		List<SubTipoChamado> subtipoChamado = new ArrayList<>();
-		subtipoChamado = repository.findAll(where(SubTipoChamadoSpecification.idSubTipoChamado(id))
-				.and(SubTipoChamadoSpecification.descricaoSubTipoChamado(descricao)).and(SubTipoChamadoSpecification.ativoSubTipoChamado(ativo)));
+		subtipoChamado = repository.findAll(
+			where(
+				SubTipoChamadoSpecification.idSubTipoChamado(id))
+				.and(SubTipoChamadoSpecification.descricaoSubTipoChamado(descricao))
+				.and(SubTipoChamadoSpecification.ativoSubTipoChamado(ativo))
+				.and(SubTipoChamadoSpecification.idTipoChamadoSubtipoChamado(idTipoChamado)));
 		if (subtipoChamado.size() == 0) {
 			throw new Exception("Não há dados");
 		}

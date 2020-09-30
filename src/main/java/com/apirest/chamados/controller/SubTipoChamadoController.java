@@ -35,8 +35,10 @@ public class SubTipoChamadoController {
 	public List<SubTipoChamado> findAll(
 			@Param(value = "id") Long id,
 			@Param(value = "descricao") String descricao,
-			@Param(value = "ativo") Boolean ativo) throws Exception {
-		return this.subtipoChamadoService.findAll(id, descricao, ativo);
+			@Param(value = "ativo") Boolean ativo,
+			@Param(value = "idTipoChamado") Long idTipoChamado
+			) throws Exception {
+		return this.subtipoChamadoService.findAll(id, descricao, ativo, idTipoChamado);
 	}
 	
 	@ApiOperation(value = "Cria um SubtipoChamado")

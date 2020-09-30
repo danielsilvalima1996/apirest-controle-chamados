@@ -29,4 +29,11 @@ public class SubTipoChamadoSpecification {
 		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("ativo"), ativo);
 	}
 
+	public static Specification<SubTipoChamado> idTipoChamadoSubtipoChamado(Long idTipoChamado) {
+		if (idTipoChamado == null) {
+			return null;
+		}
+		return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("idTipoChamado"), idTipoChamado);
+	}
+
 }
