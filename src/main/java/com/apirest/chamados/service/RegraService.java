@@ -5,7 +5,6 @@ import static org.springframework.data.jpa.domain.Specification.where;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.apirest.chamados.model.Pagina;
 import com.apirest.chamados.model.Regra;
@@ -39,6 +38,9 @@ public class RegraService {
 		if (!regra.isPresent()) {
 			throw new Exception("Regra com o id " + id + " não encontrada");
 		}
+		if (regra.get().getIdPagina().size() > 0) {
+			regra.get().setIdPagina(this.paginaService.ordenaPagina(regra.get().getIdPagina()));
+		}
 		return regra;
 	}
 
@@ -47,8 +49,7 @@ public class RegraService {
 		if (duplicated != null) {
 			throw new Exception("Regra com a descrição " + regra.getDescricao() + " já cadastrado");
 		}
-		if (regra.getIdPagina().size() > 0)
-			this.corrigePaginas(regra.getIdPagina());
+		regra.setIdPagina(this.corrigePaginas(regra.getIdPagina()));
 		return this.repository.save(regra);
 	}
 
@@ -57,22 +58,25 @@ public class RegraService {
 		if (!nova.isPresent()) {
 			throw new Exception("Regra com o id + " + regra.getId() + " não encontrada, impossíve atualizar");
 		}
-		if (regra.getIdPagina().size() > 0)
-			this.corrigePaginas(regra.getIdPagina());
+		regra.setIdPagina(this.corrigePaginas(regra.getIdPagina()));
 		return this.repository.save(regra);
 	}
 
-	public List<Pagina> corrigePaginas(final List<Pagina> paginas) {
-		for (final Pagina item : paginas) {
-			if (item.getParent() != 0) {
-				final List<Pagina> novaLista = paginas.stream().filter(nova -> nova.getId() == item.getParent())
-						.collect(Collectors.toList());
-				if (novaLista.size() == 0) {
-					final var novaDb = this.paginaService.findById(item.getParent());
-					paginas.add(novaDb.get());
+	public List<Pagina> corrigePaginas(List<Pagina> paginas) {
+		List<Pagina> novas = new ArrayList<>();
+		if (paginas.size() > 0) {
+			for (Pagina item : paginas) {
+				Optional<Pagina> novaDB = null;
+				if (item.getParent() != 0) {
+					novaDB = paginas.stream().filter(nova -> nova.getId() == item.getParent())
+							.findFirst();
+					if (!novaDB.isPresent()) {
+						novas.add(this.paginaService.findById(item.getParent()).get());
+					}
 				}
 			}
 		}
+		paginas.addAll(novas);
 		return paginas;
 	}
 

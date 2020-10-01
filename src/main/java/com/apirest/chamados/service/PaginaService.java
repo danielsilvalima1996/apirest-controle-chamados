@@ -1,5 +1,6 @@
 package com.apirest.chamados.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,23 @@ public class PaginaService {
 	private PaginaRepository repository;
 
 	public List<Pagina> findAll() throws Exception {
-		return this.repository.findAll();
+		List<Pagina> paginas = new ArrayList<>();
+		paginas = this.ordenaPagina(this.repository.findAll());
+		return paginas;
+	}
+
+	public List<Pagina> ordenaPagina(List<Pagina> paginas) {
+		if (paginas.size() > 0) {
+			for (Pagina item : paginas) {
+				if (item.getParent() != 0) {
+					Pagina atual = new Pagina();
+					atual = paginas.stream().filter(pag -> pag.getId() == item.getParent()).findFirst().get();
+					item.setLink(atual.getLink() + item.getLink());
+					atual = new Pagina();
+				}
+			}
+		}
+		return paginas;
 	}
 
 	public Optional<Pagina> findById(Long id) {
