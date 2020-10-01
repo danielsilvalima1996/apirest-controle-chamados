@@ -32,6 +32,7 @@ public class PaginaService {
 					atual = new Pagina();
 				}
 			}
+			paginas.stream().sorted();
 		}
 		return paginas;
 	}

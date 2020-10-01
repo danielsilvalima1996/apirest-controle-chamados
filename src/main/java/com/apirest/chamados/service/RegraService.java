@@ -75,6 +75,11 @@ public class RegraService {
 					}
 				}
 			}
+			System.out.println("********************************* adicionar a dash");
+			Optional<Pagina> dash = paginas.stream().filter(page -> page.getId() == 1).findFirst();
+				if (!dash.isPresent()) {
+					paginas.add(this.paginaService.findById(3L).get());
+				}
 		}
 		paginas.addAll(novas);
 		return paginas;
