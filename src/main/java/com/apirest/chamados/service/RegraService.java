@@ -49,7 +49,6 @@ public class RegraService {
 		if (duplicated != null) {
 			throw new Exception("Regra com a descrição " + regra.getDescricao() + " já cadastrado");
 		}
-		regra.setIdPagina(this.corrigePaginas(regra.getIdPagina()));
 		return this.repository.save(regra);
 	}
 
@@ -68,20 +67,18 @@ public class RegraService {
 			for (Pagina item : paginas) {
 				Optional<Pagina> novaDB = null;
 				if (item.getParent() != 0) {
-					novaDB = paginas.stream().filter(nova -> nova.getId() == item.getParent())
-							.findFirst();
+					novaDB = paginas.stream().filter(nova -> nova.getId() == item.getParent()).findFirst();
 					if (!novaDB.isPresent()) {
 						novas.add(this.paginaService.findById(item.getParent()).get());
 					}
 				}
 			}
-			System.out.println("********************************* adicionar a dash");
-			Optional<Pagina> dash = paginas.stream().filter(page -> page.getId() == 1).findFirst();
-				if (!dash.isPresent()) {
-					paginas.add(this.paginaService.findById(3L).get());
-				}
 		}
 		paginas.addAll(novas);
+		Optional<Pagina> dash = paginas.stream().filter(page -> page.getId() == 3).findFirst();
+		if (!dash.isPresent()) {
+			paginas.add(this.paginaService.findById(3L).get());
+		}
 		return paginas;
 	}
 
