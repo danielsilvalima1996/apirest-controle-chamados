@@ -1,7 +1,17 @@
 package com.apirest.chamados.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.apirest.chamados.config.JwtTokenUtil;
+import com.apirest.chamados.model.JwtRequest;
+import com.apirest.chamados.model.MenuPOUI;
+import com.apirest.chamados.model.Pagina;
+import com.apirest.chamados.model.Usuario;
+import com.apirest.chamados.repository.UsuarioRepository;
+import com.apirest.chamados.service.JwtUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.apirest.chamados.config.JwtTokenUtil;
-import com.apirest.chamados.model.JwtRequest;
-import com.apirest.chamados.model.Usuario;
-import com.apirest.chamados.repository.UsuarioRepository;
-import com.apirest.chamados.service.JwtUserDetailsService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -56,7 +60,20 @@ public class JwtAuthenticationController {
 		model.put("avatar", user.getAvatar());
 		model.put("id", user.getId());
 		model.put("ativo", user.isAtivo());
-
+		List<Pagina> paginas = user.getIdRegra().getIdPagina();
+		paginas.stream().sorted((a, b) -> a.getParent().compareTo(b.getParent()));
+		List<MenuPOUI> menu = new ArrayList<>();
+		for (Pagina p : paginas) {
+			if (p.getParent() == 0) {
+				menu.add(new MenuPOUI(p.getId(), p.getIcon(), p.getLabel(), p.getShortLabel(), p.getLink(), new ArrayList<>()));
+			} else {
+				MenuPOUI pai = menu.stream().filter(item -> item.getId() == p.getParent()).findFirst().get();
+				List<MenuPOUI> aux = pai.getSubItems();
+				aux.add(new MenuPOUI(p.getId(), p.getIcon(), p.getLabel(), p.getShortLabel(), pai.getLink() + p.getLink(), new ArrayList<>()));
+				pai.setSubItems(aux);
+			}
+		}
+		model.put("menu", menu);
 		return ResponseEntity.ok(model);
 	}
 
