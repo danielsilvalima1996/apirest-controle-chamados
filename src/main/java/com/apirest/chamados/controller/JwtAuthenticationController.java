@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.apirest.chamados.config.JwtTokenUtil;
 import com.apirest.chamados.model.JwtRequest;
@@ -65,11 +66,14 @@ public class JwtAuthenticationController {
 		List<MenuPOUI> menu = new ArrayList<>();
 		for (Pagina p : paginas) {
 			if (p.getParent() == 0) {
-				menu.add(new MenuPOUI(p.getId(), p.getIcon(), p.getLabel(), p.getShortLabel(), p.getLink(), new ArrayList<>()));
+				menu.add(new MenuPOUI(p.getId(), p.getIcon(), p.getLabel(), p.getShortLabel(), p.getLink(),
+						new ArrayList<>()));
 			} else {
 				MenuPOUI pai = menu.stream().filter(item -> item.getId() == p.getParent()).findFirst().get();
 				List<MenuPOUI> aux = pai.getSubItems();
-				aux.add(new MenuPOUI(p.getId(), p.getIcon(), p.getLabel(), p.getShortLabel(), pai.getLink() + p.getLink(), new ArrayList<>()));
+				aux.add(new MenuPOUI(p.getId(), p.getIcon(), p.getLabel(), p.getShortLabel(),
+						pai.getLink() + p.getLink(), new ArrayList<>()));
+				aux = aux.stream().sorted((a, b) -> a.getLabel().compareTo(b.getLabel())).collect(Collectors.toList());
 				pai.setSubItems(aux);
 			}
 		}
