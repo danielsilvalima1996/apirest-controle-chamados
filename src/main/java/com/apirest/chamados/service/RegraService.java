@@ -61,16 +61,15 @@ public class RegraService {
 		return this.repository.save(regra);
 	}
 
-	public List<Pagina> corrigePaginas(List<Pagina> paginas) {
+	public List<Pagina> corrigePaginas(List<Pagina> paginas) throws Exception {
+		List<Pagina> baseDB = this.paginaService.findAll();
 		List<Pagina> novas = new ArrayList<>();
 		if (paginas.size() > 0) {
 			for (Pagina item : paginas) {
 				Optional<Pagina> novaDB = null;
 				if (item.getParent() != 0) {
-					novaDB = paginas.stream().filter(nova -> nova.getId() == item.getParent()).findFirst();
-					if (!novaDB.isPresent()) {
-						novas.add(this.paginaService.findById(item.getParent()).get());
-					}
+					novaDB = baseDB.stream().filter(nova -> nova.getId() == item.getParent()).findFirst();
+					novas.add(novaDB.get());
 				}
 			}
 		}
