@@ -104,7 +104,7 @@ public class UsuarioService {
 		RetornoStatus status = new RetornoStatus(false);
 		if (usuario != null) {
 			if (!usuario.isAtivo()) {
-				throw new Exception("Usuário desativado");
+				throw new Exception("Usuário Inativo");
 			} else {
 				if (!bc.matches(senhas.getSenhaAtual(), usuario.getSenha())){
 					throw new Exception("Senha atual não confere");

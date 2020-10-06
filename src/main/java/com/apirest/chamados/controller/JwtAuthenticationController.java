@@ -87,7 +87,7 @@ public class JwtAuthenticationController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (DisabledException e) {
-			throw new Exception("USER_DISABLED", e);
+			throw new Exception("Usuário Inativo", e);
 		} catch (BadCredentialsException e) {
 			throw new Exception("Login ou Senha Inválidos", e);
 		}
