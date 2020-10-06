@@ -5,6 +5,11 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.apirest.chamados.model.RetornoStatus;
+import com.apirest.chamados.model.TrocarSenha;
+import com.apirest.chamados.model.Usuario;
+import com.apirest.chamados.service.UsuarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,9 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.apirest.chamados.model.Usuario;
-import com.apirest.chamados.service.UsuarioService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,6 +64,12 @@ public class UsuarioController {
 	@PutMapping(produces = { "application/json" }, consumes = { "application/json" })
 	public Usuario alterUsuario(@RequestBody @Valid Usuario usuario) throws Exception {
 		return this.service.alterUsuario(usuario);
+	}
+
+	@ApiOperation(value = "Altera senha")
+	@PutMapping(value = "/trocarSenha", produces = { "application/json" }, consumes = { "application/json" })
+	public RetornoStatus trocarSenha(@RequestBody @Valid TrocarSenha senhas) throws Exception {
+		return this.service.trocarSenha(senhas);
 	}
 	
 	@ApiOperation(value = "Deleta um Usuario")
