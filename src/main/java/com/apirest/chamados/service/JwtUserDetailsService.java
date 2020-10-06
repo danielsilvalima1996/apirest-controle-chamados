@@ -31,7 +31,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 				list.add(authority);
 				return new User(user.getEmail(), user.getSenha(), list);
 			} else {
-				throw new DisabledException("Usuario desativado");
+				throw new DisabledException("Usuário desativado");
 			}
 		} else {
 			throw new UsernameNotFoundException("Usuário não encontrado com o email: " + email);
