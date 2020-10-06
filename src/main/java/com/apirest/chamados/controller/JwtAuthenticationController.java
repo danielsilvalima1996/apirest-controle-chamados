@@ -61,6 +61,8 @@ public class JwtAuthenticationController {
 		model.put("avatar", user.getAvatar());
 		model.put("id", user.getId());
 		model.put("ativo", user.isAtivo());
+		model.put("regra", userDetails.getAuthorities().toString().substring(1,
+				userDetails.getAuthorities().toString().length() - 1));
 		List<Pagina> paginas = user.getIdRegra().getIdPagina();
 		paginas.stream().sorted((a, b) -> a.getParent().compareTo(b.getParent()));
 		List<MenuPOUI> menu = new ArrayList<>();
