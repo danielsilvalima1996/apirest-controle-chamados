@@ -49,6 +49,7 @@ public class RegraService {
 		if (duplicated != null) {
 			throw new Exception("Regra com a descrição " + regra.getDescricao() + " já cadastrado");
 		}
+		regra.setIdPagina(this.corrigePaginas(regra.getIdPagina()));
 		return this.repository.save(regra);
 	}
 
