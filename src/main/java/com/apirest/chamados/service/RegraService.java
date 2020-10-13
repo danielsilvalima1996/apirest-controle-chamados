@@ -49,7 +49,7 @@ public class RegraService {
 		if (duplicated != null) {
 			throw new Exception("Regra com a descrição " + regra.getDescricao() + " já cadastrado");
 		}
-		regra.setIdPagina(this.corrigePaginas(regra.getIdPagina()));
+		regra.setIdPagina(this.corrigePaginas(regra.getIdPagina(), 0L));
 		return this.repository.save(regra);
 	}
 
@@ -58,13 +58,21 @@ public class RegraService {
 		if (!nova.isPresent()) {
 			throw new Exception("Regra com o id + " + regra.getId() + " não encontrada, impossíve atualizar");
 		}
-		regra.setIdPagina(this.corrigePaginas(regra.getIdPagina()));
+		regra.setIdPagina(this.corrigePaginas(regra.getIdPagina(), regra.getId()));
 		return this.repository.save(regra);
 	}
 
-	public List<Pagina> corrigePaginas(List<Pagina> paginas) throws Exception {
+	public List<Pagina> corrigePaginas(List<Pagina> paginas, Long idRegra) throws Exception {
+		
 		List<Pagina> baseDB = this.paginaService.findAll();
 		List<Pagina> novas = new ArrayList<>();
+		
+		if (idRegra != 0) {
+			Regra regra = this.repository.findById(idRegra).get();
+			regra.setIdPagina(new ArrayList<Pagina>());
+			this.repository.save(regra);
+		}
+		
 		if (paginas.size() > 0) {
 			for (Pagina item : paginas) {
 				Optional<Pagina> novaDB = null;
@@ -75,11 +83,20 @@ public class RegraService {
 			}
 		}
 		paginas.addAll(novas);
+		
 		Optional<Pagina> dash = paginas.stream().filter(page -> page.getId() == 3).findFirst();
 		if (!dash.isPresent()) {
 			paginas.add(this.paginaService.findById(3L).get());
 		}
-		return paginas;
+
+		List<Pagina> unique = new ArrayList<Pagina>();
+		for (Pagina item : paginas) {
+			var pag = unique.stream().filter(filter -> filter.getId() == item.getId()).findFirst();
+			if (!pag.isPresent()) {
+				unique.add(item);
+			}
+		}
+		return unique;
 	}
 
 	public void deleteRegra(final Long id) throws Exception {
