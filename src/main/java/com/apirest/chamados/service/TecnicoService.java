@@ -30,7 +30,7 @@ public class TecnicoService {
 				.and(TecnicoSpecification.ativoTecnico(ativo)));
 
 		if (tecnico.size() == 0) {
-			throw new Exception("Não há dados");
+			return new ArrayList<>();
 		}
 		tecnico.forEach(item -> item.getIdUsuario().setSenha(""));
 		return tecnico;
