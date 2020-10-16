@@ -18,7 +18,6 @@ public class MenuPOUIService {
 
 	public List<MenuPOUI> criaMenu(Long idRegra) throws Exception {
 		List<Pagina> paginas = this.regraService.findById(idRegra).get().getIdPagina();
-		// paginas.stream().sorted((a, b) -> a.getParent().compareTo(b.getParent()));
 		List<MenuPOUI> menu = new ArrayList<>();
 		if (paginas.size() > 0) {
 			List<Pagina> parent = paginas.stream().filter(item -> item.getParent() == 0).collect(Collectors.toList());
