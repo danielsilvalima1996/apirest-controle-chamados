@@ -12,6 +12,8 @@ import com.apirest.chamados.repository.ChamadoRepository;
 import com.apirest.chamados.specification.ChamadoSpecification;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,7 +49,7 @@ public class ChamadoService {
 				.and(ChamadoSpecification.idTipoChamadoChamado(idTipoChamado))
 				.and(ChamadoSpecification.idSubtipoChamadoChamado(idSubtipoChamado))
 				.and(ChamadoSpecification.idTecnicoChamado(idTecnico))
-			)
+			), Sort.by(Direction.DESC, "modificado")
 		);
 
 		if (chamado.size() == 0) {
