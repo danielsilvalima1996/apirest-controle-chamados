@@ -7,7 +7,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.apirest.chamados.config.JwtTokenUtil;
 import com.apirest.chamados.model.Chamado;
+import com.apirest.chamados.model.Home;
+import com.apirest.chamados.model.Tecnico;
+import com.apirest.chamados.model.Usuario;
 import com.apirest.chamados.repository.ChamadoRepository;
 import com.apirest.chamados.specification.ChamadoSpecification;
 
@@ -30,6 +36,15 @@ public class ChamadoService {
 
 	@Autowired
 	private SubTipoChamadoService subTipoChamadoService;
+
+	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+
+	@Autowired
+	private TecnicoService tecnicoService;
 
 	public List<Chamado> findAll(
 		Long id, 
@@ -139,4 +154,29 @@ public class ChamadoService {
 		}
 		this.repository.deleteById(id);
 	}
+
+	public List<Home> findHome() {
+		List<Home> home = new ArrayList<Home>();
+		String email;
+		String jwtToken;
+		final String requestTokenHeader = this.request.getHeader("Authorization");
+		jwtToken = requestTokenHeader.substring(7);
+		email = jwtTokenUtil.getUsernameFromToken(jwtToken);
+		Usuario usuario = this.usuarioService.findByEmail(email);
+		Tecnico tecnico = this.tecnicoService.findByIdUsuario(usuario.getId());
+		if (tecnico != null) {
+			home.add(new Home("Em Aberto", 0, "color-08", this.repository.countByStatusAndIdTecnico(0, tecnico.getId())));
+			home.add(new Home("Em Análise", 1, "color-01", this.repository.countByStatusAndIdTecnico(1, tecnico.getId())));
+			home.add(new Home("Fechado", 2, "color-11", this.repository.countByStatusAndIdTecnico(2, tecnico.getId())));
+			home.add(new Home("Indefirido", 3, "color-07", this.repository.countByStatusAndIdTecnico(3, tecnico.getId())));
+		} else {
+			home.add(new Home("Em Aberto", 0, "color-08", this.repository.countByStatusAndIdUsuario(0, usuario.getId())));
+			home.add(new Home("Em Análise", 1, "color-01", this.repository.countByStatusAndIdUsuario(1, usuario.getId())));
+			home.add(new Home("Fechado", 2, "color-11", this.repository.countByStatusAndIdUsuario(2, usuario.getId())));
+			home.add(new Home("Indefirido", 3, "color-07", this.repository.countByStatusAndIdUsuario(3, usuario.getId())));
+		}
+
+		return home;
+	}
+
 }

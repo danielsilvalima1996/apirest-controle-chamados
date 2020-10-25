@@ -127,4 +127,8 @@ public class UsuarioService {
 		}
 		this.repository.deleteById(id);
 	}
+
+	public Usuario findByEmail(String email) {
+		return this.repository.findByEmail(email);
+	}
 }

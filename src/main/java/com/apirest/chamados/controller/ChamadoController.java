@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.apirest.chamados.model.Chamado;
+import com.apirest.chamados.model.Home;
 import com.apirest.chamados.service.ChamadoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,12 @@ public class ChamadoController {
 	@DeleteMapping(value = "{id}")
 	public void alterChamado(@PathVariable("id") Long id) throws Exception {
 		this.service.deleteChamado(id);
+	}
+
+	@ApiOperation(value = "Dados da home")
+	@GetMapping(value = "home", produces = { "application/json" })
+	public List<Home> findHome() throws Exception {
+		return this.service.findHome();
 	}
 
 }

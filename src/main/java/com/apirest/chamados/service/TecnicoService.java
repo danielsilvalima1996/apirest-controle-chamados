@@ -66,4 +66,8 @@ public class TecnicoService {
 		return this.repository.save(tecnico);
 	}
 
+	public Tecnico findByIdUsuario(Long id) {
+		return repository.findByIdUsuario(id);
+	}
+
 }
