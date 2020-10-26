@@ -73,8 +73,8 @@ public class ChamadoController {
 
 	@ApiOperation(value = "Indefere um Chamado")
 	@PutMapping(value = "indefere", produces = { "application/json" }, consumes = { "application/json" })
-	public Chamado indefiridoChamado(@RequestBody @Valid Chamado chamado) throws Exception {
-		return this.service.indefiridoChamado(chamado);
+	public Chamado indeferidoChamado(@RequestBody @Valid Chamado chamado) throws Exception {
+		return this.service.indeferidoChamado(chamado);
 	}
 	
 	@ApiOperation(value = "Deleta um Chamado")

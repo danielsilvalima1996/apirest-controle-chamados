@@ -127,7 +127,7 @@ public class ChamadoService {
 		return this.salvarChamado(chamado);
 	}
 
-	public Chamado indefiridoChamado(Chamado chamado) throws Exception {
+	public Chamado indeferidoChamado(Chamado chamado) throws Exception {
 		var nova = this.repository.findById(chamado.getId());
 		if (!nova.isPresent()) {
 			throw new Exception("Chamado com o id " + chamado.getId() + " não encontrado, impossíve atualizar");
@@ -168,12 +168,12 @@ public class ChamadoService {
 			home.add(new Home("Em Aberto", 0, "color-08", this.repository.countByStatusAndIdTecnico(0, tecnico.getId())));
 			home.add(new Home("Em Análise", 1, "color-01", this.repository.countByStatusAndIdTecnico(1, tecnico.getId())));
 			home.add(new Home("Fechado", 2, "color-11", this.repository.countByStatusAndIdTecnico(2, tecnico.getId())));
-			home.add(new Home("Indefirido", 3, "color-07", this.repository.countByStatusAndIdTecnico(3, tecnico.getId())));
+			home.add(new Home("Indeferido", 3, "color-07", this.repository.countByStatusAndIdTecnico(3, tecnico.getId())));
 		} else {
 			home.add(new Home("Em Aberto", 0, "color-08", this.repository.countByStatusAndIdUsuario(0, usuario.getId())));
 			home.add(new Home("Em Análise", 1, "color-01", this.repository.countByStatusAndIdUsuario(1, usuario.getId())));
 			home.add(new Home("Fechado", 2, "color-11", this.repository.countByStatusAndIdUsuario(2, usuario.getId())));
-			home.add(new Home("Indefirido", 3, "color-07", this.repository.countByStatusAndIdUsuario(3, usuario.getId())));
+			home.add(new Home("Indeferido", 3, "color-07", this.repository.countByStatusAndIdUsuario(3, usuario.getId())));
 		}
 
 		return home;
