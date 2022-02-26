@@ -3,10 +3,14 @@ package com.apirest.chamados.model.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Status implements Serializable {
 
     private String url;
     private String database;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT-3")
     private Date date;
 
     public Status(String url, String database, Date date) {
