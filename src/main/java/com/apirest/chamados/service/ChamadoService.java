@@ -164,7 +164,7 @@ public class ChamadoService {
 		email = jwtTokenUtil.getUsernameFromToken(jwtToken);
 		Usuario usuario = this.usuarioService.findByEmail(email);
 		Tecnico tecnico = this.tecnicoService.findByIdUsuario(usuario.getId());
-		if (tecnico != null) {
+		if (tecnico.getId() != null) {
 			home.add(new Home("Em Aberto", 0, "color-08", this.repository.countByStatusAndIdTecnico(0, tecnico.getId())));
 			home.add(new Home("Em Análise", 1, "color-01", this.repository.countByStatusAndIdTecnico(1, tecnico.getId())));
 			home.add(new Home("Fechado", 2, "color-11", this.repository.countByStatusAndIdTecnico(2, tecnico.getId())));
